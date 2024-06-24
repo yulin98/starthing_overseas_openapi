@@ -16,10 +16,11 @@ repositories {
 }
 
 dependencies {
+    // Extensions
+    implementation(libs.jetbrains.annotations)
+
     // Use JUnit Jupiter for testing.
     testImplementation(libs.junit.jupiter)
-    testImplementation(libs.jetbrains.annotations)
-
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 

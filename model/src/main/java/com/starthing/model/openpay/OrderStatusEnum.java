@@ -13,37 +13,50 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.starthing.model.device;
+
+package com.starthing.model.openpay;
 
 /**
- * Enum for device startup state
+ * Enum for payment transaction state
  *
  * @author wunhwantseng@gmail.com
  * @since 0.0.1
  */
-public enum StartupStatusEnum {
+public enum OrderStatusEnum {
 
     /**
-     * Accepted command
+     * Processing/waiting transaction state
      */
-    ACCEPTED("ACCEPTED"),
+    TRANSACTION_PROCESSING("TRANSACTION_PROCESSING"),
 
     /**
-     * Successful startup
+     * Paid transaction state
      */
-    ISSUED("ISSUED"),
+    TRANSACTION_PAID("TRANSACTION_PAID"),
 
     /**
-     * Failure startup
+     * Failure transaction state
      */
-    FAILED("FAILED");
+    TRANSACTION_FAILED("TRANSACTION_FAILED"),
+
+    /**
+     * Closure order state
+     */
+    TRANSACTION_CLOSED("TRANSACTION_CLOSED"),
+
+    /**
+     * Unknown state.
+     *
+     * <p> Usually will not return this state.
+     */
+    TRANSACTION_UNKNOWN("TRANSACTION_UNKNOWN");
 
     /**
      * Real state
      */
     private final String real;
 
-    StartupStatusEnum(String real) {
+    OrderStatusEnum(String real) {
         this.real = real;
     }
 
@@ -53,7 +66,7 @@ public enum StartupStatusEnum {
 
     @Override
     public String toString() {
-        return "StartupStatusEnum{" +
+        return "OrderStatusEnum{" +
                 "real='" + real + '\'' +
                 '}';
     }

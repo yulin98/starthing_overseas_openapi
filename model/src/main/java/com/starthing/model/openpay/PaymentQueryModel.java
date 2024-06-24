@@ -13,48 +13,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.starthing.model.device;
+package com.starthing.model.openpay;
+
+import java.io.Serializable;
 
 /**
- * Enum for device startup state
+ * Model for payment query.
+ *
+ * <p>
+ * {@code
+ *      {
+ *          "out_trade_number": "123123111133112331121wqsdsa",
+ *      }
+ * }
+ * <p/>
  *
  * @author wunhwantseng@gmail.com
  * @since 0.0.1
  */
-public enum StartupStatusEnum {
+public final class PaymentQueryModel implements Serializable {
 
     /**
-     * Accepted command
+     * Out transaction number of order.
+     *
+     * <p> Json field: out_trade_number
      */
-    ACCEPTED("ACCEPTED"),
+    private final String outTransactionNumber;
 
-    /**
-     * Successful startup
-     */
-    ISSUED("ISSUED"),
-
-    /**
-     * Failure startup
-     */
-    FAILED("FAILED");
-
-    /**
-     * Real state
-     */
-    private final String real;
-
-    StartupStatusEnum(String real) {
-        this.real = real;
+    public PaymentQueryModel(String outTransactionNumber) {
+        this.outTransactionNumber = outTransactionNumber;
     }
 
-    public String getReal() {
-        return real;
+    public String getOutTransactionNumber() {
+        return outTransactionNumber;
     }
 
     @Override
     public String toString() {
-        return "StartupStatusEnum{" +
-                "real='" + real + '\'' +
+        return "PaymentQueryModel{" +
+                "outTransactionNumber='" + outTransactionNumber + '\'' +
                 '}';
     }
 }
