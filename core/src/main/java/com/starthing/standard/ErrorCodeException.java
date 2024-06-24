@@ -13,31 +13,49 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.starthing.model.device;
 
-import java.io.Serializable;
+package com.starthing.standard;
 
 /**
- * Model for query order
+ * Error exception interface
  *
  * @author wunhwantseng@gmail.com
  * @since 0.0.1
  */
-public final class DeviceQueryModel implements Serializable {
+public interface ErrorCodeException {
 
     /**
-     * Out transaction number
+     * Error code
      */
-    private final String outTradeNumber;
+    String getErrorCode();
 
-    public DeviceQueryModel(String outTradeNumber) {
-        this.outTradeNumber = outTradeNumber;
+    /**
+     * Error message
+     */
+    String getErrorMessage();
+
+    /**
+     * Client error exception
+     */
+    interface ClientErrorException extends ErrorCodeException {
+
+
     }
 
-    @Override
-    public String toString() {
-        return "DeviceQueryModel{" +
-                ", outTradeNumber='" + outTradeNumber + '\'' +
-                '}';
+    /**
+     * Internal error exception
+     */
+    interface InternalErrorException extends ErrorCodeException {
+
+
     }
+
+    /**
+     * External error exception
+     */
+    interface ExternalErrorException extends ErrorCodeException {
+
+
+    }
+
 }
