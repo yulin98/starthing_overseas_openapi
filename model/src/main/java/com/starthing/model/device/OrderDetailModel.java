@@ -23,8 +23,8 @@ import java.time.LocalDateTime;
 /**
  * Model for device startup order
  *
- * @author <a href="mailto:zhengwenhuan@leyaoyao.com">Vincent-Zheng</a>
- * @since 2024/06/24
+ * @author wunhwantseng@gmail.com
+ * @since 0.0.1
  */
 public final class OrderDetailModel implements Serializable {
 
