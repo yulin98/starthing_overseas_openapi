@@ -3,6 +3,8 @@
 
 [versions]
 junit-jupiter = "5.10.2"
+jetbrains-annotations = "24.1.0"
 
 [libraries]
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }
+jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }

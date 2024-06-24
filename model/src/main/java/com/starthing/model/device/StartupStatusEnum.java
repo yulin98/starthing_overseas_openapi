@@ -6,7 +6,7 @@ package com.starthing.model.device;
  * @author wunhwantseng@gmail.com
  * @since 0.0.1
  */
-public enum StartupStateEnum {
+public enum StartupStatusEnum {
 
     ACCEPTED("ACCEPTED"),
 
@@ -19,7 +19,7 @@ public enum StartupStateEnum {
      */
     private final String real;
 
-    StartupStateEnum(String real) {
+    StartupStatusEnum(String real) {
         this.real = real;
     }
 
@@ -29,7 +29,7 @@ public enum StartupStateEnum {
 
     @Override
     public String toString() {
-        return "StartupStateEnum{" +
+        return "StartupStatusEnum{" +
                 "real='" + real + '\'' +
                 '}';
     }
