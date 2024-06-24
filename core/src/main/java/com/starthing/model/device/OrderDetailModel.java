@@ -16,6 +16,7 @@
 package com.starthing.model.device;
 
 import com.starthing.model.subscription.OrderSubscriptionModel;
+import com.starthing.standard.ResourceStandard;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -26,6 +27,7 @@ import java.time.LocalDateTime;
  * @author wunhwantseng@gmail.com
  * @since 0.0.1
  */
+@ResourceStandard.WithResource(version = "V1.0",code = "open.device.notification")
 public final class OrderDetailModel implements Serializable {
 
     /**

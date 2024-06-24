@@ -16,15 +16,17 @@
 package com.starthing.model.device;
 
 import com.starthing.model.subscription.OrderSubscriptionModel;
+import com.starthing.standard.ResourceStandard;
 
 import java.io.Serializable;
 
 /**
  * Model for device start-up
  *
- * @author wunhwantseng@gmail.com
+ * @author wunhwantseng@gmail.co**open.device.startup**m
  * @since 0.0.1
  */
+@ResourceStandard.WithResource(version = "V1.0", code = "open.device.startup")
 public final class DeviceStartupModel implements Serializable {
 
     /**
