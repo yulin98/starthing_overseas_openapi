@@ -15,6 +15,7 @@
  */
 package com.starthing.model.device;
 
+import com.starthing.model.ICallableModel;
 import com.starthing.model.subscription.OrderSubscriptionModel;
 import com.starthing.standard.ResourceStandard;
 
@@ -27,7 +28,7 @@ import java.io.Serializable;
  * @since 0.0.1
  */
 @ResourceStandard.WithResource(version = "V1.0", code = "open.device.startup")
-public final class DeviceStartupModel implements Serializable {
+public final class DeviceStartupModel implements ICallableModel<OrderDetailModel>, Serializable {
 
     /**
      * Device id

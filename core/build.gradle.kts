@@ -10,6 +10,8 @@ repositories {
 
 dependencies {
     // Extensions
+    implementation(libs.jackson.databinds)
+    implementation(libs.jackson.datatype.jsr310)
     implementation(libs.jetbrains.annotations)
 
     // Use JUnit Jupiter for testing.

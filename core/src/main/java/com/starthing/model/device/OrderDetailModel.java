@@ -27,7 +27,7 @@ import java.time.LocalDateTime;
  * @author wunhwantseng@gmail.com
  * @since 0.0.1
  */
-@ResourceStandard.WithResource(version = "V1.0",code = "open.device.notification")
+@ResourceStandard.WithResource(version = "V1.0", code = "open.device.notification")
 public final class OrderDetailModel implements Serializable {
 
     /**

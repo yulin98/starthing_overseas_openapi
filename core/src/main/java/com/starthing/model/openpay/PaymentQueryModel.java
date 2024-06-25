@@ -15,6 +15,8 @@
  */
 package com.starthing.model.openpay;
 
+import com.starthing.model.ICallableModel;
+
 import java.io.Serializable;
 
 /**
@@ -31,7 +33,7 @@ import java.io.Serializable;
  * @author wunhwantseng@gmail.com
  * @since 0.0.1
  */
-public final class PaymentQueryModel implements Serializable {
+public final class PaymentQueryModel implements ICallableModel<OrderDetailModel>, Serializable {
 
     /**
      * Out transaction number of order.

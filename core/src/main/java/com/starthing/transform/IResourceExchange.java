@@ -13,35 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.starthing.model.device;
+
+package com.starthing.transform;
 
 import com.starthing.model.ICallableModel;
-import com.starthing.standard.ResourceStandard;
 
-import java.io.Serializable;
+import java.util.concurrent.CompletionStage;
 
 /**
- * Model for query order
+ * Resource request exchange
  *
  * @author wunhwantseng@gmail.com
  * @since 0.0.1
  */
-@ResourceStandard.WithResource(version = "V1.0", code = "open.device.detail")
-public final class DeviceQueryModel implements ICallableModel<OrderDetailModel>, Serializable {
+public interface IResourceExchange {
 
-    /**
-     * Out transaction number
-     */
-    private final String outTradeNumber;
+    <T> CompletionStage<T> exchange(ITenantNamespace tenantNamespace, ICallableModel<T> callableModel);
 
-    public DeviceQueryModel(String outTradeNumber) {
-        this.outTradeNumber = outTradeNumber;
-    }
-
-    @Override
-    public String toString() {
-        return "DeviceQueryModel{" +
-                ", outTradeNumber='" + outTradeNumber + '\'' +
-                '}';
-    }
 }

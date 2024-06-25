@@ -16,6 +16,11 @@
 
 package com.starthing.standard;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
 /**
  * Standard for tenant resource
  *
@@ -23,6 +28,11 @@ package com.starthing.standard;
  * @since 0.0.1
  */
 public interface ResourceStandard {
+
+    /**
+     * Default namespace
+     */
+    String DEFAULT_NAMESPACE = "DEFAULT_NS";
 
     /**
      * Tenant number.
@@ -41,7 +51,7 @@ public interface ResourceStandard {
     /**
      * Tenant namespace.
      *
-     * <p> Default value: DEFAULT_NS
+     * <p> Default value: {@link #DEFAULT_NAMESPACE}
      */
     String TENANT_NAMESPACE = "TENANT_NS";
 
@@ -58,6 +68,8 @@ public interface ResourceStandard {
     /**
      * For definition model resource
      */
+    @Target(ElementType.TYPE)
+    @Retention(RetentionPolicy.RUNTIME)
     @interface WithResource {
 
         /**

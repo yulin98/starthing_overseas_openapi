@@ -15,6 +15,7 @@
  */
 package com.starthing.model.openpay;
 
+import com.starthing.model.ICallableModel;
 import com.starthing.model.subscription.OrderSubscriptionModel;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,7 +48,7 @@ import java.time.LocalDateTime;
  * @author wunhwantseng@gmail.com
  * @since 0.0.1
  */
-public final class PaymentCreationModel implements Serializable {
+public final class PaymentCreationModel implements ICallableModel<OrderDetailModel>, Serializable {
 
     /**
      * Product number.
