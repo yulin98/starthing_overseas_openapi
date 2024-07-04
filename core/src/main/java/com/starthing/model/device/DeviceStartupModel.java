@@ -15,14 +15,15 @@
  */
 package com.starthing.model.device;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.starthing.model.ICallableModel;
 import com.starthing.model.subscription.OrderSubscriptionModel;
 import com.starthing.serializer.ObjectSerializer;
 import com.starthing.standard.ResourceStandard;
-import com.starthing.transform.ITenantNamespace;
 
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Model for device start-up
@@ -44,9 +45,14 @@ public final class DeviceStartupModel implements ICallableModel<OrderDetailModel
     public static final String PARAM_OUT_TRADE_NUMBER = "out_trade_number";
 
     /**
-     * Param name of {@link #setupParameter}
+     * Param name of {@link #setup}
      */
     public static final String PARAM_SETUP_PARAMETER = "setup_parameter";
+
+    /**
+     * Param name of {@link #subscription}
+     */
+    public static final String PARAM_SUBSCRIPTION = "subscription";
 
     /**
      * Device id
@@ -61,17 +67,17 @@ public final class DeviceStartupModel implements ICallableModel<OrderDetailModel
     /**
      * Device setup parameter
      */
-    private final SetupParameterModel setupParameter;
+    private final SetupParameterModel setup;
 
     /**
      * Subscribe order result.
      */
     private final OrderSubscriptionModel subscription;
 
-    public DeviceStartupModel(String deviceId, String outTradeNumber, SetupParameterModel setupParameter, OrderSubscriptionModel subscription) {
+    public DeviceStartupModel(String deviceId, String outTradeNumber, SetupParameterModel setup, OrderSubscriptionModel subscription) {
         this.deviceId = deviceId;
         this.outTradeNumber = outTradeNumber;
-        this.setupParameter = setupParameter;
+        this.setup = setup;
         this.subscription = subscription;
     }
 
@@ -83,8 +89,8 @@ public final class DeviceStartupModel implements ICallableModel<OrderDetailModel
         return outTradeNumber;
     }
 
-    public SetupParameterModel getSetupParameter() {
-        return setupParameter;
+    public SetupParameterModel getSetup() {
+        return setup;
     }
 
     public OrderSubscriptionModel getSubscription() {
@@ -96,7 +102,7 @@ public final class DeviceStartupModel implements ICallableModel<OrderDetailModel
         return "DeviceStartupModel{" +
                 "deviceId='" + deviceId + '\'' +
                 ", outTradeNumber='" + outTradeNumber + '\'' +
-                ", setupParameter=" + setupParameter +
+                ", setupParameter=" + setup +
                 ", subscription=" + subscription +
                 '}';
     }
@@ -107,13 +113,31 @@ public final class DeviceStartupModel implements ICallableModel<OrderDetailModel
     public static final class DeviceStartupModelSerializer implements ObjectSerializer<DeviceStartupModel> {
 
         @Override
-        public JsonObject serialize(ITenantNamespace namespace, DeviceStartupModel source) {
+        public byte[] serialize(Gson serializer, DeviceStartupModel source) {
+            final SetupParameterModel setupParameter = source.getSetup();
+            final OrderSubscriptionModel subscriptionParameter = source.getSubscription();
+
+            final JsonObject setupParam = new JsonObject();
+            if (setupParameter.getGeneralDevice()!=null){
+                setupParam.addProperty(SetupParameterModel.PARAM_GENERAL_DEVICE, setupParameter.getGeneralDevice());
+            }
+            if (setupParameter.getMatrixXDevice()!=null){
+                setupParam.addProperty(SetupParameterModel.PARAM_MATRIX_X_DEVICE, setupParameter.getMatrixXDevice());
+            }
+            if (setupParameter.getMatrixYDevice()!=null){
+                setupParam.addProperty(SetupParameterModel.PARAM_MATRIX_Y_DEVICE, setupParameter.getMatrixYDevice());
+            }
+
+            final JsonObject subscriptionParam = new JsonObject();
+
+
             final JsonObject root = new JsonObject();
             root.addProperty(PARAM_DEVICE_ID, source.getDeviceId());
             root.addProperty(PARAM_OUT_TRADE_NUMBER, source.getOutTradeNumber());
-            root.addProperty(PARAM_SETUP_PARAMETER, source.getSetupParameter());
+            root.addProperty(PARAM_SETUP_PARAMETER, serializer.toJson(setupParam));
+            root.addProperty(PARAM_SUBSCRIPTION, serializer.toJson(subscriptionParam));
 
-            return root;
+            return serializer.toJson(root).getBytes(StandardCharsets.UTF_8);
         }
     }
 

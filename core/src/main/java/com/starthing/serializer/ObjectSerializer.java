@@ -16,6 +16,7 @@
 
 package com.starthing.serializer;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.starthing.model.ICallableModel;
 import com.starthing.transform.ITenantNamespace;
@@ -42,7 +43,7 @@ public interface ObjectSerializer<T extends Serializable> {
      * @param resource      resource
      * @param callableModel model
      */
-    JsonObject serialize(ITenantNamespace namespace, T source);
+    byte[] serialize(Gson serializer, T source);
 
     /**
      * Serialize object to bytes

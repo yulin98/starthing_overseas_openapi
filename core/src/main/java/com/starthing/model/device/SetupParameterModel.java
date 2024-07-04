@@ -26,6 +26,21 @@ import java.io.Serializable;
 public final class SetupParameterModel implements Serializable {
 
     /**
+     * Param name of {@link #generalDevice}
+     */
+    public static final String PARAM_GENERAL_DEVICE = "general_device";
+
+    /**
+     * Param name of {@link #matrixXDevice}
+     */
+    public static final String PARAM_MATRIX_X_DEVICE = "matrix_x_device";
+
+    /**
+     * Param name of {@link #matrixYDevice}
+     */
+    public static final String PARAM_MATRIX_Y_DEVICE = "matrix_y_device";
+
+    /**
      * General device parameter
      */
     private final String generalDevice;
