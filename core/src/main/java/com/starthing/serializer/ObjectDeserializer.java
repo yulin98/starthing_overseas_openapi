@@ -14,20 +14,31 @@
  * limitations under the License.
  */
 
-package com.starthing.transform;
-
-import com.starthing.model.ICallableModel;
-
-import java.util.concurrent.CompletionStage;
+package com.starthing.serializer;
 
 /**
- * Resource request exchange
+ * Object deserializer interface
  *
- * @author wunhwantseng@gmail.com
- * @since 0.0.1
+ * @author <a href="mailto:zhengwenhuan@leyaoyao.com">Vincent-Zheng</a>
+ * @since 2024/07/03
  */
-public interface IResourceExchange {
+public interface ObjectDeserializer {
 
-    <T> CompletionStage<T> exchange(ITenantNamespace tenantNamespace, ICallableModel<T> callableModel);
+    /**
+     * deserialize bytes to object
+     */
+    <T> T deserialize(byte[] value, Class<T> instanceClass);
+
+    /**
+     * Customize object serializer
+     */
+    interface ObjectCustomizeDeserializer {
+
+        /**
+         * deserialize bytes to object
+         */
+        <T> T deserialize(byte[] value, Class<T> instanceClass);
+
+    }
 
 }

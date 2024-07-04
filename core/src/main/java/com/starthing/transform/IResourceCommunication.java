@@ -21,7 +21,6 @@ import com.starthing.transform.resource.IResourceDefinition;
 import java.util.Iterator;
 import java.util.ServiceLoader;
 import java.util.concurrent.CompletionStage;
-import java.util.function.Supplier;
 
 /**
  * todo: ...
@@ -48,18 +47,18 @@ public interface IResourceCommunication {
         final ServiceLoader<IResourceCommunicationFactory> serviceLoader = ServiceLoader.load(factoryClass, Thread.currentThread().getContextClassLoader());
         final Iterator<IResourceCommunicationFactory> iterator = serviceLoader.iterator();
         if (iterator.hasNext()) {
-            final IResourceCommunicationFactory communicationFactory = iterator.next();
-
-            return communicationFactory.get();
+            return iterator.next().getObject();
         }
 
         throw new IllegalArgumentException("Cannot find implementation of IResourceCommunicationFactory");
     }
 
     /**
-     * Factory for {@link IResourceCommunication}
+     * Factory for get {@link IResourceCommunication}
      */
-    interface IResourceCommunicationFactory extends Supplier<IResourceCommunication> {
+    interface IResourceCommunicationFactory {
+
+        IResourceCommunication getObject();
 
     }
 

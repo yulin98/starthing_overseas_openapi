@@ -19,7 +19,7 @@ package com.starthing.transform.tenant;
 import com.starthing.transform.ITenantNamespace;
 
 /**
- * todo: ...
+ * Tenant namespace support
  *
  * @author wunhwantseng@gmail.com
  * @since 0.0.1

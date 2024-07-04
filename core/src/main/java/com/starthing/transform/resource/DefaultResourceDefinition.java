@@ -36,7 +36,7 @@ final class DefaultResourceDefinition implements IResourceDefinition {
     /**
      * Local cache
      */
-    private static final Map<Class<?>, IResourceDefinition> LOCAL_CACHE = new ConcurrentHashMap<>();
+    private static final Map<Class<?>, IResourceDefinition> DEFINITIONS = new ConcurrentHashMap<>();
 
     /**
      * Create resource definition
@@ -46,10 +46,10 @@ final class DefaultResourceDefinition implements IResourceDefinition {
      * @throws IllegalArgumentException if class does not load metadata
      */
     static IResourceDefinition of(Class<? extends ICallableModel<?>> modelClass) {
-        IResourceDefinition resourceDefinition = LOCAL_CACHE.get(modelClass);
+        IResourceDefinition resourceDefinition = DEFINITIONS.get(modelClass);
 
         if (resourceDefinition == null) {
-            LOCAL_CACHE.computeIfAbsent(modelClass, ignored -> {
+            DEFINITIONS.computeIfAbsent(modelClass, ignored -> {
                 // with resource
                 final ResourceStandard.WithResource modelResource = modelClass.getAnnotation(ResourceStandard.WithResource.class);
                 if (modelResource == null) {
@@ -75,9 +75,19 @@ final class DefaultResourceDefinition implements IResourceDefinition {
                 return new DefaultResourceDefinition(modelClass, modelResource.version(), modelResource.code(), callableClass, callableResource.version(), callableResource.version());
             });
 
-            resourceDefinition = LOCAL_CACHE.get(modelClass);
+            resourceDefinition = DEFINITIONS.get(modelClass);
         }
         return resourceDefinition;
+    }
+
+    /**
+     * Get resource definition
+     *
+     * @param modelClass class for model
+     * @return return instance. if instance does not exist, then return null.
+     */
+    static @Nullable IResourceDefinition get(Class<? extends ICallableModel<?>> modelClass) {
+        return DEFINITIONS.get(modelClass);
     }
 
     private static @Nullable ParameterizedType tryFindCallableModelClass(Class<? extends ICallableModel<?>> modelClass) {

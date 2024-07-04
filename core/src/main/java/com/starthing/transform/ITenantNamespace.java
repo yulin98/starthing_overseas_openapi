@@ -20,7 +20,7 @@ import com.starthing.standard.ResourceStandard;
 import com.starthing.transform.tenant.DefaultTenantNamespace;
 
 /**
- * todo: ...
+ * Tenant namespace identity
  *
  * @author wunhwantseng@gmail.com
  * @since 0.0.1

@@ -16,6 +16,9 @@
 
 package com.starthing.standard;
 
+import com.starthing.serializer.ObjectSerializer;
+
+import java.io.Serializable;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -81,6 +84,11 @@ public interface ResourceStandard {
          * Resource code
          */
         String code();
+
+        /**
+         * Object serializer factory
+         */
+        Class<? extends ObjectSerializer<? extends Serializable>> serializer();
 
     }
 

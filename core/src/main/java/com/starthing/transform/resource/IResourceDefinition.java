@@ -17,9 +17,10 @@
 package com.starthing.transform.resource;
 
 import com.starthing.model.ICallableModel;
+import org.jetbrains.annotations.Nullable;
 
 /**
- *
+ * Resource definition interface
  *
  * @author wunhwantseng@gmail.com
  * @since 0.0.1
@@ -61,6 +62,26 @@ public interface IResourceDefinition {
      */
     long getCreationTime();
 
+    /**
+     * Load resource definition by model
+     *
+     * @param callableModel callable model
+     * @return return resource definition. if not exist then return null.
+     */
+    @SuppressWarnings("unchecked")
+    static @Nullable IResourceDefinition get(ICallableModel<?> callableModel) {
+        final Class<? extends ICallableModel<?>> modelClass = (Class<? extends ICallableModel<?>>) callableModel.getClass();
+
+        return DefaultResourceDefinition.get(modelClass);
+    }
+
+    /**
+     * Parse model to resource definition
+     *
+     * @param modelClass class of model
+     * @return resource metadata
+     * @throws IllegalArgumentException when parse model failure, then will throws this error.
+     */
     static IResourceDefinition of(Class<? extends ICallableModel<?>> modelClass) {
         return DefaultResourceDefinition.of(modelClass);
     }

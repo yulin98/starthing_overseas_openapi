@@ -15,9 +15,12 @@
  */
 package com.starthing.model.device;
 
+import com.google.gson.JsonObject;
 import com.starthing.model.ICallableModel;
 import com.starthing.model.subscription.OrderSubscriptionModel;
+import com.starthing.serializer.ObjectSerializer;
 import com.starthing.standard.ResourceStandard;
+import com.starthing.transform.ITenantNamespace;
 
 import java.io.Serializable;
 
@@ -27,8 +30,23 @@ import java.io.Serializable;
  * @author wunhwantseng@gmail.co**open.device.startup**m
  * @since 0.0.1
  */
-@ResourceStandard.WithResource(version = "V1.0", code = "open.device.startup")
+@ResourceStandard.WithResource(version = "V1.0", code = "open.device.startup", serializer = DeviceStartupModel.DeviceStartupModelSerializer.class)
 public final class DeviceStartupModel implements ICallableModel<OrderDetailModel>, Serializable {
+
+    /**
+     * Param name of {@link #deviceId}
+     */
+    public static final String PARAM_DEVICE_ID = "device_id";
+
+    /**
+     * Param name of {@link #outTradeNumber}
+     */
+    public static final String PARAM_OUT_TRADE_NUMBER = "out_trade_number";
+
+    /**
+     * Param name of {@link #setupParameter}
+     */
+    public static final String PARAM_SETUP_PARAMETER = "setup_parameter";
 
     /**
      * Device id
@@ -57,6 +75,22 @@ public final class DeviceStartupModel implements ICallableModel<OrderDetailModel
         this.subscription = subscription;
     }
 
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public String getOutTradeNumber() {
+        return outTradeNumber;
+    }
+
+    public SetupParameterModel getSetupParameter() {
+        return setupParameter;
+    }
+
+    public OrderSubscriptionModel getSubscription() {
+        return subscription;
+    }
+
     @Override
     public String toString() {
         return "DeviceStartupModel{" +
@@ -66,4 +100,21 @@ public final class DeviceStartupModel implements ICallableModel<OrderDetailModel
                 ", subscription=" + subscription +
                 '}';
     }
+
+    /**
+     * {@link ObjectSerializer} for {@link DeviceStartupModel}
+     */
+    public static final class DeviceStartupModelSerializer implements ObjectSerializer<DeviceStartupModel> {
+
+        @Override
+        public JsonObject serialize(ITenantNamespace namespace, DeviceStartupModel source) {
+            final JsonObject root = new JsonObject();
+            root.addProperty(PARAM_DEVICE_ID, source.getDeviceId());
+            root.addProperty(PARAM_OUT_TRADE_NUMBER, source.getOutTradeNumber());
+            root.addProperty(PARAM_SETUP_PARAMETER, source.getSetupParameter());
+
+            return root;
+        }
+    }
+
 }

@@ -14,30 +14,24 @@
  * limitations under the License.
  */
 
-package com.starthing.transform.exchange;
+package com.starthing.transform;
 
 import com.starthing.model.ICallableModel;
-import com.starthing.transform.IResourceCommunication;
-import com.starthing.transform.IResourceExchange;
-import com.starthing.transform.ITenantNamespace;
 import com.starthing.transform.resource.IResourceDefinition;
 
 import java.util.concurrent.CompletionStage;
 
 /**
- * Default implements {@link IResourceExchange}
- *
  * @author wunhwantseng@gmail.com
  * @since 0.0.1
  */
-public final class DefaultResourceExchange implements IResourceExchange {
+final class CommunicationExchange {
 
     /**
      * Resource communicate
      */
     private final IResourceCommunication communication = IResourceCommunication.DEFAULT;
 
-    @Override
     @SuppressWarnings("unchecked")
     public <T> CompletionStage<T> exchange(ITenantNamespace tenantNamespace, ICallableModel<T> callableModel) {
         // create resource definition
@@ -45,7 +39,8 @@ public final class DefaultResourceExchange implements IResourceExchange {
 
         // resource communicate
         return communication.communicate(resourceDefinition, tenantNamespace, null)
-                .thenApply(source-> {
+                .thenApply(source -> {
+
                     return null;
                 });
     }
