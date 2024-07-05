@@ -4,4 +4,4 @@ plugins {
 }
 
 rootProject.name = "starthing_overseas_openapi"
-include("core")
+include("openapi", "openapi-resteasy")

@@ -2,11 +2,17 @@
 # https://docs.gradle.org/current/userguide/platforms.html#sub::toml-dependencies-format
 
 [versions]
+microprofile = "6.1"
+unirest = "4.4.0"
 jetbrains-annotations = "24.1.0"
-gson = "2.11.0"
+jackson = "2.17.1"
 junit-jupiter = "5.10.2"
 
 [libraries]
+microprofile = { module = "org.eclipse.microprofile:microprofile", version.ref = "microprofile" }
+microprofile-restclient = { module = "org.eclipse.microprofile.rest.client:microprofile-rest-client-api" }
+unirest-java = { module = "com.konghq:unirest-java-core", version.ref = "unirest" }
 jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }
-gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
+jackson-datatype-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "jackson" }
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }
